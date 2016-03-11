@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="Control" prefHeight="426.0" prefWidth="551.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.Control">
+   <children>
+      <Button fx:id="btn" layoutX="177.0" layoutY="14.0" mnemonicParsing="false" onAction="#pressed" text="Connect" />
+      <Label fx:id="lbl" layoutX="14.0" layoutY="18.0" text="SSH Connection" />
+      <TextField fx:id="host" layoutX="14.0" layoutY="53.0" />
+      <TextField fx:id="user" layoutX="14.0" layoutY="87.0" />
+      <PasswordField fx:id="password" layoutX="14.0" layoutY="121.0" />
+      <Text layoutX="177.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Host" />
+      <Text layoutX="178.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" />
+      <Text layoutX="177.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
+      <TextField fx:id="comm" layoutX="237.0" layoutY="229.0" text="ls -la" />
+      <Button fx:id="sed" layoutX="405.0" layoutY="229.0" mnemonicParsing="false" onAction="#sendbtn" text="Send" />
+      <TextField fx:id="cons" layoutX="249.0" layoutY="14.0" prefHeight="205.0" prefWidth="293.0" />
+   </children>
+</AnchorPane>
