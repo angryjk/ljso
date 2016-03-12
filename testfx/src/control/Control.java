@@ -1,12 +1,14 @@
 package control;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+
+
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
+import java.io.PrintStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 import com.jcraft.jsch.Channel;
-import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
@@ -16,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class Control implements Initializable  {
@@ -34,10 +37,11 @@ public class Control implements Initializable  {
 	@FXML
 	private Label lbl;
 	@FXML
-	TextField cons;
+	TextArea cons;
 	String shost = null;
 	String suser = null;
 	String spassword = null;
+	private PrintStream print;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -88,20 +92,15 @@ public Session connect(String host, String user,String password,Object jsch){
 }
 public void sendbtn(ActionEvent event){
 	try{
-	String line;
-	Channel channel=sess.openChannel("exec");
-	ChannelExec ce = (ChannelExec) channel;
-	ce.setCommand(comm.getText());
-	System.out.println(comm.getText());
-	ce.setErrStream(System.err);
-	ce.connect();
-
-    BufferedReader reader = new BufferedReader(new InputStreamReader(ce.getInputStream()));
-    while ((line = reader.readLine()) != null) {
-      System.out.println();
-      cons.setText(line);
-    }
-	//channel.connect(3*1000);
+	Channel channel=sess.openChannel("shell");
+	PipedInputStream pip = new PipedInputStream(40);
+    channel.setInputStream(pip);
+    PipedOutputStream pop = new PipedOutputStream(pip);
+    print = new PrintStream(pop); 
+    channel.setOutputStream(System.out);
+    String send = comm.getText();
+    print.println(send);
+    channel.connect(3*1000);
 	}catch(Exception e){};
 	}
 }
