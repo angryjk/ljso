@@ -2,6 +2,9 @@ package control;
 
 
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintStream;
@@ -96,8 +99,9 @@ public void sendbtn(ActionEvent event){
 	PipedInputStream pip = new PipedInputStream(40);
     channel.setInputStream(pip);
     PipedOutputStream pop = new PipedOutputStream(pip);
-    print = new PrintStream(pop); 
-    channel.setOutputStream(System.out);
+    print = new PrintStream(pop);
+    OutputStream logOutput = new BufferedOutputStream(new FileOutputStream("1.txt"));
+    channel.setOutputStream(new MultiplexOutputStream(logOutput, System.out), true);
     String send = comm.getText();
     print.println(send);
     channel.connect(3*1000);
