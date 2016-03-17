@@ -14,8 +14,15 @@
       <PasswordField fx:id="Password" layoutX="14.0" layoutY="158.0" promptText="Password" />
       <Button fx:id="Connect" layoutX="169.0" layoutY="127.0" mnemonicParsing="false" onAction="#ConnectPressed" text="Connect" />
       <Button fx:id="Save" layoutX="169.0" layoutY="158.0" mnemonicParsing="false" onAction="#SavePressed" prefHeight="25.0" prefWidth="60.0" text="Save" />
-      <ListView fx:id="ServerList" layoutX="14.0" layoutY="190.0" prefHeight="200.0" prefWidth="216.0" />
       <TextField fx:id="Command" layoutX="14.0" layoutY="411.0" />
       <Button fx:id="Execute" layoutX="171.0" layoutY="411.0" mnemonicParsing="false" onAction="#ExecutePressed" text="Execute" />
+      <TableView fx:id="table" layoutX="14.0" layoutY="190.0" prefHeight="200.0" prefWidth="231.0">
+        <columns>
+          <TableColumn fx:id="tcId" prefWidth="24.0" text="ID" />
+          <TableColumn fx:id="tcHost" prefWidth="65.0" text="Host" />
+            <TableColumn fx:id="tcUser" prefWidth="66.0" text="User" />
+            <TableColumn fx:id="tcPassword" prefWidth="75.0" text="Password" />
+        </columns>
+      </TableView>
     </children>
 </AnchorPane>
